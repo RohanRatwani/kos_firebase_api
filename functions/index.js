@@ -11,7 +11,8 @@ app.use(cors());
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // res.setHeader('Access-Control-Allow-Origin', 'https://kos-wound-scanning.web.app/users');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -50,8 +51,9 @@ app.post("/update/:id", async (req, res) => {
   const id = req.params.id;
   delete req.params.id;
   const body = req.body;
+  console.log(body);
   await 
-  admin.firestore().collection('NewPatients').doc(req.params.id).update(body);
+  admin.firestore().collection('NewPatients').doc(id).update(body);
   res.status(200).send({ msg: "Updated" })
 });
 
